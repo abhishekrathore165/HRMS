@@ -8,3 +8,9 @@ export const TABS = [
     "View Tax Summary",
     "Work Login",
 ]
+
+import logo from "../assets/logo.png"
+
+export {
+    logo
+}

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { logo } from "../constants/data";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -64,7 +65,7 @@ const Login = () => {
 
 
       <div className="absolute bottom-4 flex flex-col items-center w-full text-white text-center">
-        <img src="src/assets/logo.png" alt="logo" className="w-16 h-16 md:w-20 md:h-20 mb-2" />
+        <img src={logo} alt="logo" className="w-16 h-16 md:w-20 md:h-20 mb-2" />
         <p className="text-xs md:text-sm">2024 Infoway Solutions LLC</p>
       </div>
     </div>
