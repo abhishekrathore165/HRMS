@@ -38,7 +38,7 @@ import { getEmployeeById, updateAddress, updatePhoto } from "../models/employeeM
 
       res.json({
           message: "Employee details updated successfully!",
-          imageUrl: photo ? `http://localhost:8000${photo}` : null,
+          imageUrl: photo ? `https://server-sw0p.onrender.com${photo}` : null,
           address: addressResponse,
           image: imageResponse,
       });
