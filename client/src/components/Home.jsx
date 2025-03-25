@@ -157,7 +157,7 @@ const Home = () => {
                 </button>
             </div>
 
-            {/* Tabs */}
+        
             <div className='xl:flex hidden border-b w-full gap-2 bg-gray-400 '>
                 {
                     TABS.map((tab, index) => (
@@ -171,14 +171,14 @@ const Home = () => {
 
             </div>
 
-            {/* Title */}
+         
             <h2 className="text-black text-xl font-bold flex justify-center my-6">
                 View Employee Data
             </h2>
 
-            {/* Employee Data */}
+      
             <div className="p-5 flex flex-wrap gap-5 justify-center">
-                {/* Left Table */}
+              
                 <div className="w-full md:w-[48%]">
                     <table className="border border-gray-300 w-full">
                         <tbody>
@@ -199,7 +199,7 @@ const Home = () => {
                     </table>
                 </div>
 
-                {/* Right Table */}
+          
                 <div className="w-full md:w-[48%]">
                     <table className="border border-gray-300 w-full">
                         <tbody>
@@ -220,9 +220,8 @@ const Home = () => {
                 </div>
             </div>
 
-            {/* Address & Image Upload */}
             <div className="p-5 flex flex-wrap gap-5 justify-center">
-                {/* Address */}
+             
                 <div className="w-full md:w-[48%]">
                     <h3 className="font-bold bg-black text-white p-2">Address:</h3>
                     <table className="border border-gray-300 w-full">
@@ -244,7 +243,7 @@ const Home = () => {
                     </table>
                 </div>
 
-                {/* Image Upload */}
+           
                 <div className="w-full md:w-[48%] flex items-center justify-center">
                     <label className="w-40 h-40 md:w-60 md:h-60 border-2 rounded-lg shadow-md bg-gray-50 border-gray-300 flex items-center justify-center cursor-pointer relative overflow-hidden">
                         {image ? (
@@ -259,7 +258,6 @@ const Home = () => {
                 </div>
             </div>
 
-            {/* Submit & Cancel Buttons */}
             <div className="p-5">
                 <div className="flex justify-start">
                     <button
