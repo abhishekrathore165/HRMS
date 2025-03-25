@@ -22,7 +22,7 @@ import { getEmployeeById, updateAddress, updatePhoto } from "../models/employeeM
       let photo = null;
 
       if (req.file) {
-          photo = `/uploads/${req.file.filename}`;
+          photo = req.file.path;
           imageResponse = await updatePhoto(id, photo);
       }
 
@@ -38,7 +38,7 @@ import { getEmployeeById, updateAddress, updatePhoto } from "../models/employeeM
 
       res.json({
           message: "Employee details updated successfully!",
-          imageUrl: photo ? `https://server-sw0p.onrender.com${photo}` : null,
+          imageUrl: photo ,
           address: addressResponse,
           image: imageResponse,
       });

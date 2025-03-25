@@ -17,8 +17,6 @@ const Home = () => {
         zipcode: "",
     })
 
-
-
     const [image, setImage] = useState(null);
     const [imageFile, setImageFile] = useState(null);
 
@@ -61,7 +59,7 @@ const Home = () => {
             })
 
             if (response.data?.photo) {
-                setImage(`https://server-sw0p.onrender.com${response.data.photo}`);
+                setImage(response.data.photo);
             } else {
                 console.warn("No image found in response.");
             }
@@ -111,11 +109,11 @@ const Home = () => {
         formDataToSend.append("zipcode", formData.zipcode);
 
         if (imageFile) {
-            formDataToSend.append("image", imageFile);
+            formDataToSend.append("photo", imageFile);
         }
 
         try {
-            const response = await axios.put(`${API}${userId}`, formDataToSend, {
+           await axios.put(`${API}${userId}`, formDataToSend, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "multipart/form-data",
