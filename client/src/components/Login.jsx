@@ -27,20 +27,20 @@ const Login = () => {
   };
 
   return (
-    <div className="h-screen bg-blue-700 flex flex-col justify-center items-center relative bg-cover bg-center"
+    <div  className="h-screen bg-blue-700 flex flex-col justify-center items-center relative bg-cover bg-center p-4"
       style={{
         backgroundImage: `url("https://st.depositphotos.com/1635204/3951/i/450/depositphotos_39519879-Elegant-dark-blue-background.jpg")`,
       }}
     >
 
-      <div className="p-8 rounded-[50px] shadow-lg w-96 border-2 border-white bg-black/40 backdrop-blur-sm">
-        <h2 className="text-center text-white text-2xl font-bold mb-4">HRMS</h2>
+      <div className="p-6 md:p-8 rounded-[50px] shadow-lg max-w-sm w-full border-2 border-white bg-black/40 backdrop-blur-sm">
+        <h2 className="text-center text-white text-xl md:text-2xl font-bold mb-4">HRMS</h2>
         <form onSubmit={handleSubmit}>
-          <label className="text-white mb-1">Email:</label>
+          <label className="text-white mb-1 block">Email:</label>
           <input
             type="email"
             placeholder="Your Email Id"
-            className="w-full p-2 mb-4 border rounded outline-none"
+            className="w-full p-2 mb-4 border rounded outline-none text-sm md:text-base"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -49,12 +49,12 @@ const Login = () => {
           <input
             type="password"
             placeholder="Enter Password"
-            className="w-full p-2 mb-4 border rounded outline-none"
+             className="w-full p-2 mb-4 border rounded outline-none text-sm md:text-base"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">
+          <button className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 text-sm md:text-base">
             Login
           </button>
         </form>
@@ -62,8 +62,8 @@ const Login = () => {
 
 
       <div className="absolute bottom-4 flex flex-col items-center w-full text-white text-center">
-        <img src="src/assets/logo.png" alt="logo" className="w-20 h-20 mb-2" />
-        <p>2024 Infoway Solutions LLC</p>
+        <img src="src/assets/logo.png" alt="logo" className="w-16 h-16 md:w-20 md:h-20 mb-2" />
+        <p className="text-xs md:text-sm">2024 Infoway Solutions LLC</p>
       </div>
     </div>
 

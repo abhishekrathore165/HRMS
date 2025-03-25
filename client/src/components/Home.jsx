@@ -4,11 +4,9 @@ import { GiExitDoor } from "react-icons/gi";
 import { TABS } from '../constants/data'
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const [employeeData, setEmployeeData] = useState(null);
-    const native = useNavigate()
     const [formData, setFormData] = useState({
         address: "",
         city: "",
@@ -16,7 +14,7 @@ const Home = () => {
         zipcode: "",
     })
 
-    
+
 
     const [image, setImage] = useState(null);
     const [imageFile, setImageFile] = useState(null);
@@ -27,7 +25,7 @@ const Home = () => {
         if (userId) {
             fetchEmployeeData(userId);
         } else {
-          
+
             console.error("User ID is missing!");
         }
     }, []);
@@ -38,7 +36,6 @@ const Home = () => {
             const token = localStorage.getItem("token");
 
             if (!token) {
-                native("/")
                 console.error("Token is missing. Please log in again.");
                 return;
             }
@@ -144,22 +141,24 @@ const Home = () => {
     const handleLogout = () => {
         localStorage.removeItem("token");
         window.location.href = "/";
-      };
-      
+    };
+
 
     return (
-        <div className='max-w-full'>
-            <div className='flex items-center justify-between p-5'>
-                <div className='flex gap-5'>
+        <div className="max-w-full p-4">
+
+            <div className="flex items-center justify-between p-5">
+                <div className="flex gap-5">
                     <HiHome size={25} />
                     <GiExitDoor size={25} onClick={handleLogout} />
                 </div>
-                <div>
-                    <button className='h-[2rem] w-[10rem] bg-blue-500  text-white text-start pl-2 rounded-md'>Privileged User</button>
-                </div>
+                <button className="h-8 w-40 bg-blue-500 text-white text-start pl-2 rounded-md">
+                    Privileged User
+                </button>
             </div>
 
-            <div className='flex border-b w-full gap-2 bg-gray-400 '>
+            {/* Tabs */}
+            <div className='xl:flex hidden border-b w-full gap-2 bg-gray-400 '>
                 {
                     TABS.map((tab, index) => (
                         <button
@@ -172,148 +171,111 @@ const Home = () => {
 
             </div>
 
-            <h2 className='text-black text-xl font-bold flex items-center justify-center my-10'>View Employee Data</h2>
+            {/* Title */}
+            <h2 className="text-black text-xl font-bold flex justify-center my-6">
+                View Employee Data
+            </h2>
 
-            <div className='  p-5 flex justify-between'>
-                <div className='w-[700px]'>
-                    <table className='border border-gray-300 w-full'>
+            {/* Employee Data */}
+            <div className="p-5 flex flex-wrap gap-5 justify-center">
+                {/* Left Table */}
+                <div className="w-full md:w-[48%]">
+                    <table className="border border-gray-300 w-full">
                         <tbody>
-                            <tr className='border border-gray-300'>
-                                <td className='bg-gray-200 w-[50%] pl-3 font-bold py-1 border-r-2 border-gray-300'>Empolyee Name:</td>
-                                <td>
-                                    <p className='pl-3 border-none outline-none w-full'>{employeeData?.name}</p>
-                                </td>
-                            </tr>
-                            <tr className='border border-gray-300'>
-                                <td className='bg-gray-200 w-[50%] pl-3 font-bold py-1 border-r-2 border-gray-300'>Empolyee Type:</td>
-                                <td>
-                                    <p className='pl-3 border-none outline-none w-full'>{employeeData?.employment_type}</p>
-                                </td>
-                            </tr>
-                            <tr className='border border-gray-300'>
-                                <td className='bg-gray-200 w-[50%] pl-3 font-bold py-1 border-r-2 border-gray-300'>Contact Number:</td>
-                                <td>
-                                    <p className='pl-3 border-none outline-none w-full'>{employeeData?.contact_number}</p>
-                                </td>
-                            </tr>
-                            <tr className='border border-gray-300'>
-                                <td className='bg-gray-200 w-[50%] pl-3 font-bold py-1 border-r-2 border-gray-300'>Job Location:</td>
-                                <td>
-                                    <p className='pl-3 border-none outline-none w-full'>{employeeData?.job_location}</p>
-                                </td>
-                            </tr>
+                            {[
+                                { label: "Employee Name:", value: employeeData?.name },
+                                { label: "Employee Type:", value: employeeData?.employment_type },
+                                { label: "Contact Number:", value: employeeData?.contact_number },
+                                { label: "Job Location:", value: employeeData?.job_location },
+                            ].map((item, index) => (
+                                <tr key={index} className="border border-gray-300">
+                                    <td className="bg-gray-200 pl-3 font-bold py-2 border-r-2">
+                                        {item.label}
+                                    </td>
+                                    <td className="pl-3">{item.value}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
 
-
-                <div className='w-[700px]'>
-                    <table className='border border-gray-300 w-full'>
+                {/* Right Table */}
+                <div className="w-full md:w-[48%]">
+                    <table className="border border-gray-300 w-full">
                         <tbody>
-                            <tr className='border border-gray-300'>
-                                <td className='bg-gray-200 w-[50%] pl-3 font-bold py-1 border-r-2 border-gray-300'>Empolyee ID:</td>
-                                <td>
-                                    <p className='pl-3 border-none outline-none w-full'>{employeeData?.id}</p>
-                                </td>
-                            </tr>
-                            <tr className='border border-gray-300'>
-                                <td className='bg-gray-200 w-[50%] pl-3 font-bold py-1 border-r-2 border-gray-300'>Jo Title:</td>
-                                <td>
-                                    <p className='pl-3 border-none outline-none w-full'>{employeeData?.job_title}</p>
-                                </td>
-                            </tr>
-                            <tr className='border border-gray-300'>
-                                <td className='bg-gray-200 w-[50%] pl-3 font-bold py-1 border-r-2 border-gray-300'>Date of Joining:</td>
-                                <td>
-                                    <p className='pl-3 border-none outline-none w-full'>{employeeData?.date_of_joining}</p>
-                                </td>
-                            </tr>
+                            {[
+                                { label: "Employee ID:", value: employeeData?.id },
+                                { label: "Job Title:", value: employeeData?.job_title },
+                                { label: "Date of Joining:", value: employeeData?.date_of_joining },
+                            ].map((item, index) => (
+                                <tr key={index} className="border border-gray-300">
+                                    <td className="bg-gray-200 pl-3 font-bold py-2 border-r-2">
+                                        {item.label}
+                                    </td>
+                                    <td className="pl-3">{item.value}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <div className='p-5 flex justify-between'>
-                <div className="mt-6 w-[700px]">
+            {/* Address & Image Upload */}
+            <div className="p-5 flex flex-wrap gap-5 justify-center">
+                {/* Address */}
+                <div className="w-full md:w-[48%]">
                     <h3 className="font-bold bg-black text-white p-2">Address:</h3>
-                    <table className='border border-gray-300 w-full'>
+                    <table className="border border-gray-300 w-full">
                         <tbody>
-                            <tr className='border border-gray-300'>
-
-                                <td className='pl-3'>
-                                    <input
-                                        type="text"
-                                        name="address"
-                                        value={formData?.address}
-                                        onChange={handleInputChange}
-                                        className=" pl-2 h-[2rem] text-sm font-bold border-2 w-[500px] my-2 outline-none rounded-lg "
-                                    />
-                                </td>
-                            </tr>
-                            <tr className='border border-gray-300'>
-
-                                <td className='pl-3'>
-                                    <input
-                                        type="text"
-                                        name="city"
-                                        value={formData?.city}
-                                        onChange={handleInputChange}
-                                        className=" pl-2 h-[2rem] text-sm font-bold border-2 w-[500px] my-2 outline-none rounded-lg "
-                                    />
-                                </td>
-                            </tr>
-                            <tr className='border border-gray-300'>
-
-                                <td className='pl-3'>
-                                    <input
-                                        type="text"
-                                        name="state"
-                                        value={formData?.state}
-                                        onChange={handleInputChange}
-                                        className=" pl-2 h-[2rem] text-sm font-bold border-2 w-[500px] my-2 outline-none rounded-lg "
-                                    />
-                                </td>
-                            </tr>
-                            <tr className='border border-gray-300'>
-
-                                <td className='pl-3'>
-                                    <input
-                                        type="text"
-                                        name="zipcode"
-                                        value={formData?.zipcode}
-                                        onChange={handleInputChange}
-                                        className=" pl-2 h-[2rem] text-sm font-bold border-2 w-[500px] my-2 outline-none rounded-lg "
-                                    />
-                                </td>
-                            </tr>
-
+                            {["address", "city", "state", "zipcode"].map((field, index) => (
+                                <tr key={index} className="border border-gray-300">
+                                    <td className="pl-3">
+                                        <input
+                                            type="text"
+                                            name={field}
+                                            value={formData?.[field]}
+                                            onChange={handleInputChange}
+                                            className="pl-2 h-10 text-sm font-bold border-2 w-full my-2 outline-none rounded-lg"
+                                        />
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
 
-                <div className="w-[700px] flex items-center justify-center">
-                    <label className="w-60 h-60 border-2 rounded-[50px] shadow-md bg-gray-50 border-gray-300 flex items-center justify-center cursor-pointer relative overflow-hidden">
+                {/* Image Upload */}
+                <div className="w-full md:w-[48%] flex items-center justify-center">
+                    <label className="w-40 h-40 md:w-60 md:h-60 border-2 rounded-lg shadow-md bg-gray-50 border-gray-300 flex items-center justify-center cursor-pointer relative overflow-hidden">
                         {image ? (
                             <img src={image} alt="Employee" className="w-full h-full object-cover" />
                         ) : (
-                            <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-300 rounded-lg p-3 text-sm">
+                            <span className="absolute text-center bg-gray-300 p-2 text-sm">
                                 Click to upload image
                             </span>
                         )}
                         <input type="file" className="hidden" onChange={handleImageUpload} />
                     </label>
                 </div>
-
-
-
             </div>
-            <div className='pl-3'>
-                <div className="flex justify-start mt-4">
-                    <button onClick={handleSubmit} className="bg-blue-600 rounded-lg text-white px-4 py-2 mr-2">Submit</button>
-                    <button onClick={handleCancel} className="bg-gray-600 rounded-lg text-white px-4 py-2">Cancel</button>
+
+            {/* Submit & Cancel Buttons */}
+            <div className="p-5">
+                <div className="flex justify-start">
+                    <button
+                        onClick={handleSubmit}
+                        className="bg-blue-600 rounded-lg text-white px-4 py-2 mr-2"
+                    >
+                        Submit
+                    </button>
+                    <button
+                        onClick={handleCancel}
+                        className="bg-gray-600 rounded-lg text-white px-4 py-2"
+                    >
+                        Cancel
+                    </button>
                 </div>
             </div>
-
         </div>
     )
 }
