@@ -7,10 +7,12 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+     const API = "https://server-sw0p.onrender.com/api/auth/login"
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8000/api/auth/login", { email, password });
+      const response = await axios.post(API, { email, password });
 
       localStorage.setItem("token", response.data?.token);
       

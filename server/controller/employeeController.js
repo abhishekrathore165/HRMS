@@ -21,18 +21,17 @@ import { getEmployeeById, updateAddress, updatePhoto } from "../models/employeeM
       let imageResponse = null;
       let photo = null;
 
-      // Check if a file is uploaded
       if (req.file) {
           photo = `/uploads/${req.file.filename}`;
           imageResponse = await updatePhoto(id, photo);
       }
 
-      // Check if address details are provided
+     
       if (address || city || state || zipcode) {
           addressResponse = await updateAddress(id, { address, city, state, zipcode });
       }
 
-      // If neither address nor image was provided, return an error
+     
       if (!addressResponse && !imageResponse) {
           return res.status(400).json({ message: "No data provided for update" });
       }

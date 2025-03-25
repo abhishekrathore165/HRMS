@@ -5,6 +5,9 @@ import { TABS } from '../constants/data'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
+
+const API = "https://server-sw0p.onrender.com/api/employee/"
+
 const Home = () => {
     const [employeeData, setEmployeeData] = useState(null);
     const [formData, setFormData] = useState({
@@ -42,7 +45,7 @@ const Home = () => {
 
 
 
-            const response = await axios.get(`http://localhost:8000/api/employee/${id}`, {
+            const response = await axios.get(`${API}${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -58,7 +61,7 @@ const Home = () => {
             })
 
             if (response.data?.photo) {
-                setImage(`http://localhost:8000${response.data.photo}`);
+                setImage(`https://server-sw0p.onrender.com${response.data.photo}`);
             } else {
                 console.warn("No image found in response.");
             }
@@ -112,7 +115,7 @@ const Home = () => {
         }
 
         try {
-            const response = await axios.put(`http://localhost:8000/api/employee/${userId}`, formDataToSend, {
+            const response = await axios.put(`${API}${userId}`, formDataToSend, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "multipart/form-data",

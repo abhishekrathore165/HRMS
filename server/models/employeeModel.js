@@ -3,10 +3,10 @@ import pool from "../config/db.js";
 export const getEmployeeById =async(id)=>{
     try {
         const { rows } = await pool.query("SELECT * FROM employees WHERE id=$1", [id]);
-        return rows[0] || null;  // ✅ Return `null` if no employee found
+        return rows[0] || null;  
      } catch (error) {
         console.error("Database error:", error);
-        throw new Error("Database query failed");  // ✅ Ensure proper error handling
+        throw new Error("Database query failed");  
      }
 }
 
