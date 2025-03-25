@@ -3,19 +3,19 @@ import dotenv from "dotenv"
 
 dotenv.config()
 const {Pool} = pkg ;
-
 const pool = new Pool({
-    user:process.env.USER,
-    host:process.env.HOST,
-    datapase:process.env.DB_DATABASE,
-    password:process.env.PASSWORD,
-    port:process.env.DBPORT,
+    connectionString: process.env.DATABASE_URL,
+    ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false, 
 });
 
-console.log(process.env.DB_DATABASE)
 
-pool.connect(()=>{
-    console.log("Connection pool established with Database")
-})
+pool.connect((err, client, release) => {
+    if (err) {
+        console.error(" Database connection failed:", err.message);
+    } else {
+        console.log(" Database connected successfully!");
+        release(); 
+    }
+});
 
 export default pool;
