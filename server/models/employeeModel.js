@@ -19,7 +19,7 @@ export const updateAddress = async(id,data)=>{
 
 export const updatePhoto = async(id,photo)=>{
     await pool.query(
-        `UPDATE employees SET photo=$1 WHERE id=$2`,[photo,id]
+        `UPDATE employees SET photo=COALESCE($1, photo) WHERE id=$2`,[photo,id]
     )
     return {message:"Employee image updated successfully"}
 }

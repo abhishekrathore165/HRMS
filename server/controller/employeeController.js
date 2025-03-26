@@ -17,6 +17,8 @@ import { getEmployeeById, updateAddress, updatePhoto } from "../models/employeeM
       const { id } = req.params;
       const { address, city, state, zipcode } = req.body;
       
+      console.log("Upload File",req.file)
+      
       let addressResponse = null;
       let imageResponse = null;
       let photo = null;

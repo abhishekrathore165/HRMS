@@ -48,7 +48,8 @@ const Home = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-
+               
+            console.log(response.data)
             setEmployeeData(response.data);
 
             setFormData({
@@ -58,8 +59,9 @@ const Home = () => {
                 zipcode: response.data.zipcode || "",
             })
 
-            if (response.data?.photo) {
-                setImage(response.data.photo);
+            if (response.data.photo) {
+                setImage(response.data?.photo);
+                console.log("Image URL:", response.data.photo);
             } else {
                 console.warn("No image found in response.");
             }
@@ -109,7 +111,7 @@ const Home = () => {
         formDataToSend.append("zipcode", formData.zipcode);
 
         if (imageFile) {
-            formDataToSend.append("photo", imageFile);
+            formDataToSend.append("image", imageFile);
         }
 
         try {
